@@ -5,14 +5,14 @@
 @section('content')
 <div class="space-y-6">
     <!-- Header -->
-    <div class="flex justify-between items-center">
+    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-4 sm:space-y-0">
         <div>
             <h1 class="text-2xl font-bold text-gray-900">Activities</h1>
             <p class="text-gray-600">Manage and track all activities</p>
         </div>
-        <div class="flex space-x-3">
+        <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
             <a href="{{ route('activities.create') }}" 
-               class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+               class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                 </svg>
@@ -22,8 +22,8 @@
     </div>
 
     <!-- Filters -->
-    <div class="bg-white p-6 rounded-lg shadow">
-        <form method="GET" action="{{ route('activities.index') }}" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+    <div class="bg-white p-4 sm:p-6 rounded-lg shadow">
+        <form method="GET" action="{{ route('activities.index') }}" class="space-y-4 sm:space-y-0 sm:grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-5 sm:gap-4">
             <div>
                 <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
                 <select id="status" name="status" class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
@@ -71,16 +71,16 @@
                        class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
             </div>
 
-            <div class="lg:col-span-5 flex space-x-3">
+            <div class="sm:col-span-1 md:col-span-2 lg:col-span-5 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
                 <button type="submit" 
-                        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+                        class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                     </svg>
                     Filter
                 </button>
                 <a href="{{ route('activities.index') }}" 
-                   class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                   class="inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
                     Clear
                 </a>
             </div>
@@ -92,10 +92,10 @@
         @if($activities->count() > 0)
             <ul class="divide-y divide-gray-200">
                 @foreach($activities as $activity)
-                    <li class="px-6 py-4 hover:bg-gray-50">
-                        <div class="flex items-center justify-between">
+                    <li class="px-4 sm:px-6 py-4 hover:bg-gray-50">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0">
                             <div class="flex-1 min-w-0">
-                                <div class="flex items-center justify-between">
+                                <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between">
                                     <div class="flex-1">
                                         <h3 class="text-sm font-medium text-gray-900">
                                             <a href="{{ route('activities.show', $activity) }}" class="hover:text-indigo-600">
@@ -104,7 +104,7 @@
                                         </h3>
                                         <p class="text-sm text-gray-600 mt-1">{{ Str::limit($activity->description, 150) }}</p>
                                         
-                                        <div class="flex items-center space-x-4 mt-2">
+                                        <div class="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 mt-2">
                                             <div class="flex items-center space-x-2">
                                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $activity->getStatusColor() }}">
                                                     {{ ucfirst(str_replace('_', ' ', $activity->status)) }}
@@ -114,7 +114,7 @@
                                                 </span>
                                             </div>
                                             
-                                            <div class="flex items-center space-x-4 text-xs text-gray-500">
+                                            <div class="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-4 text-xs text-gray-500">
                                                 <span>Date: {{ $activity->activity_date->format('M d, Y') }}</span>
                                                 @if($activity->assignee)
                                                     <span>Assigned: {{ $activity->assignee->name }}</span>
@@ -126,13 +126,13 @@
                                 </div>
                             </div>
                             
-                            <div class="ml-4 flex-shrink-0 flex space-x-2">
+                            <div class="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-2 sm:ml-4 sm:flex-shrink-0">
                                 <a href="{{ route('activities.show', $activity) }}" 
-                                   class="text-indigo-600 hover:text-indigo-900 text-sm font-medium">
+                                   class="inline-flex items-center justify-center px-3 py-1.5 border border-transparent text-sm font-medium rounded-md text-indigo-600 bg-indigo-50 hover:bg-indigo-100">
                                     View
                                 </a>
                                 <a href="{{ route('activities.edit', $activity) }}" 
-                                   class="text-gray-600 hover:text-gray-900 text-sm font-medium">
+                                   class="inline-flex items-center justify-center px-3 py-1.5 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
                                     Edit
                                 </a>
                             </div>

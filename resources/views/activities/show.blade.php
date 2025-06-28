@@ -5,27 +5,27 @@
 @section('content')
 <div class="max-w-6xl mx-auto space-y-6">
     <!-- Header -->
-    <div class="flex justify-between items-start">
+    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start space-y-4 sm:space-y-0">
         <div>
-            <h1 class="text-2xl font-bold text-gray-900">{{ $activity->title }}</h1>
+            <h1 class="text-xl sm:text-2xl font-bold text-gray-900">{{ $activity->title }}</h1>
             <p class="text-gray-600">Activity Details</p>
         </div>
-        <div class="flex space-x-3">
+        <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
             <a href="{{ route('activities.edit', $activity) }}" 
-               class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+               class="inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                 </svg>
                 Edit
             </a>
             <a href="{{ route('activities.index') }}" 
-               class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+               class="inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
                 Back to List
             </a>
         </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
         <!-- Activity Details -->
         <div class="lg:col-span-2 space-y-6">
             <!-- Main Activity Info -->
@@ -39,7 +39,7 @@
                         <p class="mt-1 text-sm text-gray-900">{{ $activity->description }}</p>
                     </div>
                     
-                    <div class="grid grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <h4 class="text-sm font-medium text-gray-700">Category</h4>
                             <p class="mt-1 text-sm text-gray-900">{{ $activity->category ? $activity->category->name : 'N/A' }}</p>
