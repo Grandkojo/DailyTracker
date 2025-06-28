@@ -81,7 +81,7 @@ class DashboardController extends Controller
     }
 
     /**
-     * Get activities for a specific date via AJAX.
+     * Get activities for a specific date.
      */
     public function getActivitiesByDate(Request $request)
     {
