@@ -133,17 +133,17 @@ class EmployeeActivitySeeder extends Seeder
         ];
 
         // Date ranges
-        $today = Carbon::today();
-        $oneDayAgo = Carbon::today()->subDays(1);
+        $yesterday = Carbon::today()->subDays(1);
         $twoDaysAgo = Carbon::today()->subDays(2);
+        $threeDaysAgo = Carbon::today()->subDays(3);
 
         // Create activities for each employee
         foreach ($employees as $index => $employee) {
-            // Activity distribution: 3 today, 4 one day ago, 3 two days ago
+            // Activity distribution: 3 yesterday, 4 two days ago, 3 three days ago
             $dateDistribution = [
-                $today->format('Y-m-d') => 3,
-                $oneDayAgo->format('Y-m-d') => 4,
-                $twoDaysAgo->format('Y-m-d') => 3
+                $yesterday->format('Y-m-d') => 3,
+                $twoDaysAgo->format('Y-m-d') => 4,
+                $threeDaysAgo->format('Y-m-d') => 3
             ];
 
             $activityCount = 0;

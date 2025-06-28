@@ -19,20 +19,30 @@ class DashboardController extends Controller
         $selectedDate = $request->get('date', now()->format('Y-m-d'));
         
         // Get activities for the selected date
-        $activities = Activity::with(['creator', 'assignee', 'updates.updater'])
+        $activitiesQuery = Activity::with(['creator', 'assignee', 'updates.updater'])
             ->whereDate('activity_date', $selectedDate)
-            ->orderBy('created_at', 'desc')
-            ->where('employee_id', $user->employee_id)
-            ->get();
+            ->orderBy('created_at', 'desc');
+        
+        // If user is admin, show all activities. Otherwise, show only assigned activities
+        if (!$user->isAdmin()) {
+            $activitiesQuery->where('assigned_to', $user->id);
+        }
+        
+        $activities = $activitiesQuery->get();
 
         // Get pending activities for handover
-        $pendingActivities = Activity::with(['creator', 'assignee'])
+        $pendingQuery = Activity::with(['creator', 'assignee'])
             ->whereIn('status', ['pending', 'in_progress'])
             ->where('activity_date', '<=', $selectedDate)
             ->orderBy('priority', 'desc')
-            ->orderBy('activity_date', 'asc')
-            ->where('assigned_to', $user->employee_id)
-            ->get();
+            ->orderBy('activity_date', 'asc');
+        
+        // If user is admin, show all pending activities. Otherwise, show only assigned pending activities
+        if (!$user->isAdmin()) {
+            $pendingQuery->where('assigned_to', $user->id);
+        }
+        
+        $pendingActivities = $pendingQuery->get();
 
         // Get statistics
         $stats = [
@@ -44,13 +54,15 @@ class DashboardController extends Controller
         ];
 
         // Get recent updates
-        $recentUpdates = \App\Models\ActivityUpdate::with(['activity', 'updater'])
+        $recentUpdatesQuery = \App\Models\ActivityUpdate::with(['activity', 'updater'])
             ->whereHas('activity', function ($query) use ($selectedDate) {
                 $query->whereDate('activity_date', $selectedDate);
             })
             ->orderBy('update_time', 'desc')
-            ->limit(10)
-            ->get();
+            ->limit(10);
+        
+        
+        $recentUpdates = $recentUpdatesQuery->get();
 
         // Get team members
         $teamMembers = User::where('is_active', true)
@@ -74,11 +86,18 @@ class DashboardController extends Controller
     public function getActivitiesByDate(Request $request)
     {
         $date = $request->get('date', now()->format('Y-m-d'));
+        $user = Auth::user();
         
-        $activities = Activity::with(['creator', 'assignee', 'updates.updater'])
+        $activitiesQuery = Activity::with(['creator', 'assignee', 'updates.updater'])
             ->whereDate('activity_date', $date)
-            ->orderBy('created_at', 'desc')
-            ->get();
+            ->orderBy('created_at', 'desc');
+        
+        // If user is admin, show all activities. Otherwise, show only assigned activities
+        if (!$user->isAdmin()) {
+            $activitiesQuery->where('assigned_to', $user->employee_id);
+        }
+        
+        $activities = $activitiesQuery->get();
 
         return response()->json($activities);
     }

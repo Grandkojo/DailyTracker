@@ -61,7 +61,9 @@ class ActivityController extends Controller
             ->orderBy('name')
             ->get();
 
-        return view('activities.create', compact('teamMembers'));
+        $categories = Category::all();
+
+        return view('activities.create', compact('teamMembers', 'categories'));
     }
 
     /**

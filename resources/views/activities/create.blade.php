@@ -42,12 +42,11 @@
                     <select id="category" name="category" required
                             class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 @error('category') border-red-500 @enderror">
                         <option value="">Select Category</option>
-                        <option value="sms_monitoring" {{ old('category') == 'sms_monitoring' ? 'selected' : '' }}>SMS Monitoring</option>
-                        <option value="system_maintenance" {{ old('category') == 'system_maintenance' ? 'selected' : '' }}>System Maintenance</option>
-                        <option value="user_support" {{ old('category') == 'user_support' ? 'selected' : '' }}>User Support</option>
-                        <option value="bug_fix" {{ old('category') == 'bug_fix' ? 'selected' : '' }}>Bug Fix</option>
-                        <option value="performance_monitoring" {{ old('category') == 'performance_monitoring' ? 'selected' : '' }}>Performance Monitoring</option>
-                        <option value="other" {{ old('category') == 'other' ? 'selected' : '' }}>Other</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->category_id }}" {{ old('category') == $category->category_id ? 'selected' : '' }}>
+                                {{ $category->name }}
+                            </option>
+                        @endforeach
                     </select>
                     @error('category')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -98,7 +97,7 @@
                         <option value="">Unassigned</option>
                         @foreach($teamMembers as $member)
                             <option value="{{ $member->id }}" {{ old('assigned_to') == $member->id ? 'selected' : '' }}>
-                                {{ $member->name }} ({{ $member->position }} - {{ $member->department }})
+                                {{ $member->name }} ({{ $member->position }})
                             </option>
                         @endforeach
                     </select>
