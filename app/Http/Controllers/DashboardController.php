@@ -22,6 +22,7 @@ class DashboardController extends Controller
         $activities = Activity::with(['creator', 'assignee', 'updates.updater'])
             ->whereDate('activity_date', $selectedDate)
             ->orderBy('created_at', 'desc')
+            ->where('employee_id', $user->employee_id)
             ->get();
 
         // Get pending activities for handover
@@ -30,6 +31,7 @@ class DashboardController extends Controller
             ->where('activity_date', '<=', $selectedDate)
             ->orderBy('priority', 'desc')
             ->orderBy('activity_date', 'asc')
+            ->where('assigned_to', $user->employee_id)
             ->get();
 
         // Get statistics
