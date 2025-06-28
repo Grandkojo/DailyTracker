@@ -1,61 +1,100 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# DailyTracker
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A comprehensive activity and performance tracking system for organizations, built with Laravel.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **User Management**: Admin and support team roles, department assignment, registration, and authentication.
+- **Activity Tracking**: Create, assign, update, and track activities with priorities, statuses, and categories.
+- **Activity Updates**: Log progress and status changes with remarks and user bio details.
+- **Categories & Departments**: Organize activities and users for better reporting and filtering.
+- **Reports**: Filterable, exportable reports with grouping (by date/month), statistics, and performance metrics.
+- **Dashboard**: Daily overview of activities, pending handovers, and recent updates.
+- **Comprehensive Test Suite**: Unit and feature tests for all major flows.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tech Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Backend**: Laravel (PHP)
+- **Frontend**: Blade, Tailwind CSS
+- **Database**: MySQL (default), SQLite (for testing)
+- **Testing**: PHPUnit
 
-## Learning Laravel
+## Getting Started
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Prerequisites
+- PHP >= 8.1
+- Composer
+- Node.js & npm
+- MySQL or SQLite
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Installation
+1. **Clone the repository:**
+   ```bash
+   git clone <your-repo-url>
+   cd DailyTracker
+   ```
+2. **Install dependencies:**
+   ```bash
+   composer install
+   npm install
+   ```
+3. **Copy and configure environment:**
+   ```bash
+   cp .env.example .env
+   # Edit .env to set your database and mail settings
+   php artisan key:generate
+   ```
+4. **Run migrations and seeders:**
+   ```bash
+   php artisan migrate --seed
+   ```
+5. **Build frontend assets:**
+   ```bash
+   npm run build
+   ```
+6. **Start the development server:**
+   ```bash
+   php artisan serve
+   ```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Usage
 
-## Laravel Sponsors
+- **Login/Register:**
+  - Register as a support team member or login as admin (see seeders for default admin credentials).
+- **Dashboard:**
+  - View today's activities, pending handovers, and recent updates.
+- **Activities:**
+  - Create, assign, update, and track activities. Change status and add remarks.
+- **Reports:**
+  - Filter by date, user, category, or status. Group by date or month. Export as CSV.
+- **Performance:**
+  - View user and department performance metrics, completion rates, and activity breakdowns.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Running Tests
 
-### Premium Partners
+- **Unit and Feature Tests:**
+  ```bash
+  php artisan test
+  ```
+- Uses SQLite in-memory by default for fast, isolated testing.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## Project Structure
 
-## Contributing
+- `app/Models/` — Eloquent models
+- `app/Http/Controllers/` — Controllers for activities, reports, auth, etc.
+- `database/migrations/` — Database schema
+- `database/seeders/` — Initial data
+- `resources/views/` — Blade templates
+- `tests/` — Unit and feature tests
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Contribution
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/YourFeature`)
+3. Commit your changes with clear messages
+4. Push to the branch (`git push origin feature/YourFeature`)
+5. Open a Pull Request
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is open-source and available under the [MIT License](LICENSE).
